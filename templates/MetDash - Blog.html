@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetDash</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        html {
+            interpolate-size: allow-keywords;
+        }
+
+        body {
+            background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        nav {
+            width: fit-content;
+            margin: 0rem auto;
+            margin-right: calc(100% - 70%);
+
+            padding: 10px;
+            /*   background: black; */
+            border-radius: 8px;
+
+            @supports (corner-shape: squircle) {
+                border-radius: 24px;
+                border-shape: squircle;
+            }
+
+            ul:has(:not(:hover)) {
+                anchor-name: --test;
+            }
+
+            &::before {
+                z-index: -2;
+                background-attachment: fixed;
+                background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
+            }
+
+            &::after {
+                backdrop-filter: blur(2px);
+                background-color: hsl(200 100% 100% / 0.1);
+                z-index: -1;
+            }
+
+            & > ul {
+                position: relative;
+
+                &::after {
+                content: "";
+                position: absolute;
+                z-index: -3;
+                inset: -8px;
+                border-radius: 8px;
+
+                @supports (corner-shape: squircle) {
+                    border-radius: 24px;
+                    border-shape: squircle;
+                }
+                background: hsl(0 0% 0% / 0.8);
+                backdrop-filter: blur(2px);
+                }
+            }
+
+            &::before,
+            &::after {
+                content: "";
+                border-radius: 8px;
+
+                position-anchor: --test;
+                position: absolute;
+                top: calc(anchor(bottom) - 4px);
+                left: calc(anchor(left) + 1rem);
+                right: calc(anchor(right) + 1rem);
+                bottom: anchor(bottom);
+
+                transition: 500ms;
+                transition-timing-function: linear(
+                0,
+                0.008 1.1%,
+                0.031 2.2%,
+                0.129 4.8%,
+                0.257 7.2%,
+                0.671 14.2%,
+                0.789 16.5%,
+                0.881 18.6%,
+                0.957 20.7%,
+                1.019 22.9%,
+                1.063 25.1%,
+                1.094 27.4%,
+                1.114 30.7%,
+                1.112 34.5%,
+                1.018 49.9%,
+                0.99 59.1%,
+                1
+                );
+            }
+
+            &:has(a:hover)::before,
+            &:has(a:hover)::after {
+                @supports (corner-shape: squircle) {
+                corner-shape: squircle;
+                border-radius: 50%;
+                }
+                top: anchor(top);
+                left: anchor(left);
+                right: anchor(right);
+            }
+
+            &:has(li:first-of-type a:hover)::before,
+            &:has(li:first-of-type a:hover)::after {
+                @supports (corner-shape: squircle) {
+                border-radius: 32px 50% 50% 32px;
+                }
+            }
+
+            &:has(li:last-of-type a:hover)::before,
+            &:has(li:last-of-type a:hover)::after {
+                @supports (corner-shape: squircle) {
+                border-radius: 50% 32px 32px 50%;
+                }
+            }
+
+            > ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                display: flex;
+            }
+
+            a {
+                display: block;
+                padding: 1rem;
+                text-decoration: none;
+                color: white;
+
+                &:hover {
+                position: relative;
+                display: block;
+                anchor-name: --test;
+                }
+            }
+        }
+
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            font-family: system-ui;
+            font-size: 1rem;
+        }
+
+        .top-bar {
+            background-color: rgb(249, 246, 246);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .top-bar img {
+            height: auto;
+        }
+
+        .top-bar h1 {
+            font-size: 30px;
+            color: rgb(5, 4, 4);
+            margin: 0 20px;
+            flex-grow: 1;
+        }
+
+        input[type=text] {
+            width: 150px;
+            box-sizing:border-box;
+            border: 2px solid #0a0101;
+            border-radius: 15px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.658);
+            background-image: url('searchicon.png');
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 6px 10px 6px 20px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input[type=text]:focus {
+            width: 100%;
+        }
+
+        .container {
+            margin-top: 200px; /* Adjusted for fixed top bar */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 800px;
+            height: 500px;
+        }
+
+        .footer {
+            margin-top: calc(100% - 85%);
+            background-color: rgb(248, 244, 244);
+            text-align: center;
+            color: rgb(4, 4, 4);
+            font-size: 12px;
+            position: relative;
+            bottom: auto;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .footer img {
+            position: inherit;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <!--- <img src="/static/images/Lab_logo_2.png" alt="Obatalab Logo" width="180" height="100"> --->
+        <h1>MetDash</h1>
+        <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/analysis">Analysis</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+        </nav>
+        <form>
+            <input type="text" name="search" placeholder="Search...">
+        </form>
+    </div>
+
+    <div class="container">
+        <h1 class="text-center">News</h1><br>
+        <p class="text-center">
+            This webpage is under construction</p>
+    </div>
+
+    <div class="footer">
+        <img src="/static/images/Lab_logo_2.png" alt="Obatalab Logo" width="180" height="100">
+        <p>
+            Terms of Use | Privacy Policy | US Privacy Notice<br>
+            Trademarks of Obatalab and its affiliated companies. 2025 Obatalab
+        </p>
+    </div>
+
+</body>
+</html>

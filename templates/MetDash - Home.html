@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetDash</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        html {
+            interpolate-size: allow-keywords;
+        }
+
+        body {
+            background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        nav {
+            width: fit-content;
+            margin: 0rem auto;
+            margin-right: calc(100% - 70%);
+
+            padding: 10px;
+            /*   background: black; */
+            border-radius: 8px;
+
+            @supports (corner-shape: squircle) {
+                border-radius: 24px;
+                border-shape: squircle;
+            }
+
+            ul:has(:not(:hover)) {
+                anchor-name: --test;
+            }
+
+            &::before {
+                z-index: -2;
+                background-attachment: fixed;
+                background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
+            }
+
+            &::after {
+                backdrop-filter: blur(2px);
+                background-color: hsl(200 100% 100% / 0.1);
+                z-index: -1;
+            }
+
+            & > ul {
+                position: relative;
+
+                &::after {
+                content: "";
+                position: absolute;
+                z-index: -3;
+                inset: -8px;
+                border-radius: 8px;
+
+                @supports (corner-shape: squircle) {
+                    border-radius: 24px;
+                    border-shape: squircle;
+                }
+                background: hsl(0 0% 0% / 0.8);
+                backdrop-filter: blur(2px);
+                }
+            }
+
+            &::before,
+            &::after {
+                content: "";
+                border-radius: 8px;
+
+                position-anchor: --test;
+                position: absolute;
+                top: calc(anchor(bottom) - 4px);
+                left: calc(anchor(left) + 1rem);
+                right: calc(anchor(right) + 1rem);
+                bottom: anchor(bottom);
+
+                transition: 500ms;
+                transition-timing-function: linear(
+                0,
+                0.008 1.1%,
+                0.031 2.2%,
+                0.129 4.8%,
+                0.257 7.2%,
+                0.671 14.2%,
+                0.789 16.5%,
+                0.881 18.6%,
+                0.957 20.7%,
+                1.019 22.9%,
+                1.063 25.1%,
+                1.094 27.4%,
+                1.114 30.7%,
+                1.112 34.5%,
+                1.018 49.9%,
+                0.99 59.1%,
+                1
+                );
+            }
+
+            &:has(a:hover)::before,
+            &:has(a:hover)::after {
+                @supports (corner-shape: squircle) {
+                corner-shape: squircle;
+                border-radius: 50%;
+                }
+                top: anchor(top);
+                left: anchor(left);
+                right: anchor(right);
+            }
+
+            &:has(li:first-of-type a:hover)::before,
+            &:has(li:first-of-type a:hover)::after {
+                @supports (corner-shape: squircle) {
+                border-radius: 32px 50% 50% 32px;
+                }
+            }
+
+            &:has(li:last-of-type a:hover)::before,
+            &:has(li:last-of-type a:hover)::after {
+                @supports (corner-shape: squircle) {
+                border-radius: 50% 32px 32px 50%;
+                }
+            }
+
+            > ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                display: flex;
+            }
+
+            a {
+                display: block;
+                padding: 1rem;
+                text-decoration: none;
+                color: white;
+
+                &:hover {
+                position: relative;
+                display: block;
+                anchor-name: --test;
+                }
+            }
+        }
+
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            font-family: system-ui;
+            font-size: 1rem;
+        }
+
+        .top-bar {
+            background-color: rgb(248, 247, 247);
+            padding: 15.5px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .top-bar img {
+            height: auto;
+        }
+
+        .top-bar h1 {
+            font-size: 30px;
+            color: rgb(7, 53, 37);
+            margin: 0 20px;
+            flex-grow: 1;
+        }
+
+        input[type=text] {
+            width: 150px;
+            box-sizing:border-box;
+            border: 2px solid #0a0101;
+            border-radius: 15px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.658);
+            background-image: url('searchicon.png');
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 6px 10px 6px 20px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input[type=text]:focus {
+            width: 100%;
+        }
+
+
+        .slideshow-container {
+            max-width: 1000px;
+            position:sticky;
+            margin-top: calc(100% - 90%);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name:fade;
+            animation-duration:20s;
+        }
+
+        @keyframes fade {
+            from {opacity: 1} 
+            to {opacity: 0.8}
+        }
+
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+            .prev, .next,.text {font-size: 11px}
+        }
+
+        .begin-section {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+            margin-left: calc(100% - 65%);
+            border-radius: 10px;
+            width: calc(100% - 70%);
+        }
+        .begin-section h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        .begin-section p {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .Description {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+            margin-left: calc(100% - 75%);
+            border-radius: 10px;
+            width: calc(100% - 50%);
+        }
+        .Description h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        .Description p {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: inline-block;
+            position: relative;
+        }
+        .button-container button {
+            background-color: rgb(150, 231, 43);
+            color: rgb(29, 110, 202);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .button-container button:active {
+            transform: scale(0.95);
+        }
+        .button-container button:focus-visible {
+            outline: 2px solid rgb(29, 110, 202);
+            outline-offset: 2px;
+        }
+
+        button:hover{
+            background-color: rgb(29, 110, 202);
+            color: rgb(150, 231, 43);
+        }
+
+        .footer {
+            margin-top: calc(100% - 85%);
+            background-color: rgb(248, 244, 244);
+            text-align: center;
+            color: rgb(4, 4, 4);
+            font-size: 12px;
+            position: relative;
+            bottom: auto;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .footer img {
+            position: inherit;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <!--- <img src="/static/images/Lab_logo_2.png" alt="Obatalab Logo" width="180" height="100"> --->
+        <h1>MetDash</h1>
+        <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/analysis">Analysis</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+        </nav>
+        <form>
+            <input type="text" name="search" placeholder="Search...">
+        </form>
+    </div>
+
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 5</div>
+                <img src="/static/images/idea.jpeg" width="100%" height="300">
+            <div class="text">Caption Text</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 5</div>
+                <img src="/static/images/field-of-sorghum-dszc.jpg" width="100%" height="300">
+            <div class="text">Caption Two</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 5</div>
+                <img src="/static/images/GC-MS QTOF.jpg" width="100%" height="300">
+            <div class="text">Caption Three</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">4 / 5</div>
+                <img src="/static/images/Chromatogram.jpg" width="100%" height="300">
+            <div class="text">Caption Three</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">5 / 5</div>
+                <img src="/static/images/data-analysis.jpeg" width="100%" height="300">
+            <div class="text">Caption Three</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span> 
+        <span class="dot" onclick="currentSlide(2)"></span> 
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+    </div>
+
+    <div class="begin-section">
+        <h2>Welcome to MetDash</h2>
+        <p>Your one-stop solution for comprehensive metabolomics data analysis.</p>
+        <div class="get-started button">
+            <a href="/analysis" class="button-container">
+                <button type="button" position="relative" class="btn btn-primary">Get Started</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="Description">
+        <summary><h2 style="color: rgb(255, 255, 255);">Analysis Description</h2></summary>
+        <p style="color: rgb(251, 252, 249);">Welcome to the MetDash project! This platform is designed to streamline the analysis of metabolomics data, providing a user-friendly interface for researchers to upload and analyze their raw metabolite height data.</p>
+        <p style="color: rgb(251, 252, 249);">To get started, please upload your raw metabolite height data generated after using QTOF quantitation software. The data will be processed to generate insights into metabolite levels, which can be crucial for understanding various biological processes.</p>
+        <p style="color: rgb(251, 252, 249);">For any questions or support, please refer to the documentation or contact our support team.</p>
+    </div>
+
+    <div class="footer">
+        <img src="/static/images/Lab_logo_2.png" alt="Obatalab Logo" width="180" height="100">
+        <p>
+            Terms of Use | Privacy Policy | US Privacy Notice<br>
+            Trademarks of Obatalab. 2025 Obatalab
+        </p>
+    </div>
+
+    
+<script>
+    let slideIndex = 0;
+    let slideTimer;
+
+    function showSlidesAuto() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+
+        slideTimer = setTimeout(showSlidesAuto, 10000); // Change every 10 seconds
+    }
+
+    function plusSlides(n) {
+        clearTimeout(slideTimer);
+        slideIndex += n - 1;
+        showSlidesAuto();
+    }
+
+    function currentSlide(n) {
+        clearTimeout(slideTimer);
+        slideIndex = n - 1;
+        showSlidesAuto();
+    }
+
+    window.onload = showSlidesAuto;
+</script>
+
+
+</body>
+</html>
