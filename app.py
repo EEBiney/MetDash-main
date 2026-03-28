@@ -31,27 +31,27 @@ app.config["REPORTS_FOLDER"] = REPORTS_FOLDER
 # Home page
 @app.route("/")
 def home():
-    return render_template("MetDash - Home.html")
+    return render_template("MetDash_Home.html")
 
 # About page
 @app.route("/about")
 def about():
-    return render_template("MetDash - About.html")
+    return render_template("MetDash_About.html")
 
 # Blog page
 @app.route("/blog")
 def blog():
-    return render_template("MetDash - Blog.html")
+    return render_template("MetDash_Blog.html")
 
 # Contact page
 @app.route("/contact")
 def contact():
-    return render_template("MetDash - Contact.html")
+    return render_template("MetDash_Contact.html")
 
 # Analysis page
 @app.route("/analysis")
 def analysis():
-    return render_template("MetDash - Analysis.html")
+    return render_template("MetDash_Analysis.html")
 
 @app.route("/upload", methods=["POST"])
 def process():
