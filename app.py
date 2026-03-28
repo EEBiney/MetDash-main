@@ -15,11 +15,11 @@ from Python_script_test import (
 
 app = Flask(__name__)
 
-# Absolute paths for UPLOAD and REPORTS
-UPLOAD_FOLDER = r"/Users/emmanuelbiney/Library/CloudStorage/OneDrive-UniversityofNebraska-Lincoln/MetDash-main/UPLOAD"
-#UPLOAD_FOLDER = r"/Users/emmanuelbiney/Library/CloudStorage/OneDrive-UniversityofNebraska-Lincoln/MetDash-main/UPLOAD"
-REPORTS_FOLDER = r"/Users/emmanuelbiney/Library/CloudStorage/OneDrive-UniversityofNebraska-Lincoln/MetDash-main/REPORTS"
-#REPORTS_FOLDER = r"/Users/emmanuelbiney/Library/CloudStorage/OneDrive-UniversityofNebraska-Lincoln/MetDash-main/REPORTS"
+# Relative paths for UPLOAD and REPORTS
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "UPLOAD")
+REPORTS_FOLDER = os.path.join(BASE_DIR, "REPORTS")
 
 # Ensure folders exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -131,4 +131,5 @@ def process2():
     data_file.save(data_path)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
