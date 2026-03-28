@@ -29,31 +29,31 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["REPORTS_FOLDER"] = REPORTS_FOLDER
 
 # Home page
-@app.route("/home")
+@app.route("/")
 def home():
     return render_template("MetDash - Home.html")
 
 # About page
-@app.route("/about")
+@app.route("/")
 def about():
     return render_template("MetDash - About.html")
 
 # Blog page
-@app.route("/blog")
+@app.route("/")
 def blog():
     return render_template("MetDash - Blog.html")
 
 # Contact page
-@app.route("/contact")
+@app.route("/")
 def contact():
     return render_template("MetDash - Contact.html")
 
 # Analysis page
-@app.route("/analysis")
+@app.route("/")
 def analysis():
     return render_template("MetDash - Analysis.html")
 
-@app.route("/upload", methods=["POST"])
+@app.route("/", methods=["POST"])
 def process():
     # Expect uploaded files
     if "data" not in request.files or "sample" not in request.files:
