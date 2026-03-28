@@ -34,26 +34,26 @@ def home():
     return render_template("MetDash - Home.html")
 
 # About page
-@app.route("/")
+@app.route("/about")
 def about():
     return render_template("MetDash - About.html")
 
 # Blog page
-@app.route("/")
+@app.route("/blog")
 def blog():
     return render_template("MetDash - Blog.html")
 
 # Contact page
-@app.route("/")
+@app.route("/contact")
 def contact():
     return render_template("MetDash - Contact.html")
 
 # Analysis page
-@app.route("/")
+@app.route("/analysis")
 def analysis():
     return render_template("MetDash - Analysis.html")
 
-@app.route("/", methods=["POST"])
+@app.route("/upload", methods=["POST"])
 def process():
     # Expect uploaded files
     if "data" not in request.files or "sample" not in request.files:
