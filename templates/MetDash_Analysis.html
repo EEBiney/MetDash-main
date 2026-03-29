@@ -387,23 +387,22 @@
             return response.blob();
         })
         .then(blob => {
+            // Get filename from uploaded file
+            const dataFile = form.querySelector('#dataInput').files[0];
+            const baseName = dataFile ? dataFile.name.replace(/\.[^/.]+$/, '') : 'results';
+        
             // Trigger the zip download
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'results.zip';
+            a.download = baseName + '_bundle.zip';
             document.body.appendChild(a);
             a.click();
             a.remove();
             window.URL.revokeObjectURL(url);
-
+        
             // Clear the form
             form.reset();
-            btn.disabled = false;
-            btn.textContent = 'Submit';
-        })
-        .catch(err => {
-            alert('Error: ' + err.message);
             btn.disabled = false;
             btn.textContent = 'Submit';
         });
