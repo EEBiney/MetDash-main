@@ -129,6 +129,9 @@ def process():
         as_attachment=True,
         download_name=f"{base_name}_bundle.zip"
     )
+     except Exception as e:
+        import traceback
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
