@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetDash</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+    html {
+        interpolate-size: allow-keywords;
+    }
+
+    body {
+        background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: system-ui;
+        font-size: 1rem;
+    }
+
+    /* TOP BAR */
+    .top-bar {
+        background-color: rgb(249, 246, 246);
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-sizing: border-box;
+    }
+
+    .top-bar h1 {
+        font-size: 24px;
+        color: rgb(5, 4, 4);
+        margin: 0;
+    }
+
+    /* NAV */
+    nav > ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        background: hsl(0 0% 0% / 0.8);
+        border-radius: 8px;
+        padding: 6px;
+    }
+
+    nav a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        text-decoration: none;
+        color: white;
+        font-size: 0.9rem;
+    }
+
+    nav a:hover {
+        background-color: rgba(255,255,255,0.15);
+        border-radius: 6px;
+    }
+
+    /* SEARCH */
+    input[type=text] {
+        width: 120px;
+        box-sizing: border-box;
+        border: 2px solid #0a0101;
+        border-radius: 15px;
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.658);
+        padding: 6px 10px;
+        transition: width 0.4s ease-in-out;
+    }
+
+    input[type=text]:focus {
+        width: 180px;
+        outline: none;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+        margin-top: 120px;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    /* SUBMISSION BOXES */
+    .Submission_Container1,
+    .Submission_Container2 {
+        text-align: center;
+        padding: 20px;
+        background-color: rgba(1, 1, 1, 0.505);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+        box-sizing: border-box;
+        height: auto; /* Remove fixed height */
+    }
+
+    /* FOOTER */
+    .footer {
+        background-color: rgb(248, 244, 244);
+        text-align: center;
+        color: rgb(4, 4, 4);
+        font-size: 12px;
+        width: 100%;
+        margin-top: 40px;
+        padding: 10px 0;
+    }
+
+    .footer img {
+        margin: 10px 0;
+        max-width: 150px;
+        height: auto;
+    }
+
+    /* MOBILE BREAKPOINT */
+    @media (max-width: 600px) {
+        .top-bar {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        .top-bar h1 {
+            font-size: 20px;
+        }
+
+        nav > ul {
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        input[type=text] {
+            width: 100%;
+        }
+
+        input[type=text]:focus {
+            width: 100%;
+        }
+
+        .container {
+            margin-top: 160px;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .Submission_Container1,
+        .Submission_Container2 {
+            padding: 15px;
+        }
+
+        button.btn {
+            width: 100%;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <div class="top-bar">
+        <!--- <img src="/static/images/Lab_logo_2.png" alt="Obatalab Logo" width="180" height="100"> --->
+        <h1>MetDash</h1>
+        <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/analysis">Analysis</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+        </nav>
+        <form>
+            <input type="text" name="search" placeholder="Search...">
+        </form>
+    </div>
+
+    <div class="container">
+        <!--- <details class="Description">
+            <summary><h2 style="color: rgb(255, 255, 255);">Analysis Description</h2></summary>
+            <p style="color: rgb(251, 252, 249);">Welcome to the MetDash project! This platform is designed to streamline the analysis of metabolomics data, providing a user-friendly interface for researchers to upload and analyze their raw metabolite height data.</p>
+            <p style="color: rgb(251, 252, 249);">To get started, please upload your raw metabolite height data after using QTOF quantitation software. The data will be processed to generate insights into metabolite levels, which can be crucial for understanding various biological processes.</p>
+            <p style="color: rgb(251, 252, 249);">For any questions or support, please refer to the documentation or contact our support team.</p>
+        </details> --->
+        
+
+        <div class="Submission_Container1">
+            <h2 style="color: rgb(255, 255, 255);">Pre-Data Analysis</h2><br>
+            
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="fileInput" class="form-label" style="color: rgb(250, 250, 252);">Upload Raw Metabolite Data (CSV):</label>
+                    <input type="file" class="form-control" id="dataInput" name="data" value="CSV file" accept=".csv" required>
+                    <br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fileInput" class="form-label" style="color: rgb(250, 250, 252);">Upload Sample Info (TXT):</label>
+                    <input type="file" class="form-control" id="sampleInput" name="sample" value="txt file" accept=".txt" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="Submission_Container2">
+            <h2 style="color: rgb(255, 255, 255);">Post-Data Analysis</h2><br>
+            
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                
+                <div class>
+                    <label for="project_name" class="form-label" style="color: rgb(250, 250, 252);">Project Name:</label>
+                    <input type="dropdown" id="dropdown" class="form-control" name="dropdown" value="" placeholder="Enter Project Name" required><br>
+
+                    <select id="Treatment" class="form-control" name="treatment-type" required>
+                        <option value="" disabled selected>Select Treatment Column</option>
+                        <option value="Type1">Column1</option>
+                        <option value="Type2">Column2</option>
+                        <option value="Type3">Column3</option>
+                        <option value="Type4">Column4</option>
+                        <option value="Type5">Column5</option>
+                    </select><br>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="fileInput" class="form-label" style="color: rgb(250, 250, 252);">Upload Pre-Data Results (CSV):</label>
+                    <input type="file" class="form-control" id="dataInput2" name="data2" value="CSV file" accept=".csv" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="/static/images/Lab_logo_2.png" alt="Obatalab Logo" width="180" height="100">
+        <p>
+            Terms of Use | Privacy Policy | US Privacy Notice<br>
+            Trademarks of Obatalab. 2025 Obatalab
+        </p>
+    </div>
+
+</body>
+</html>
