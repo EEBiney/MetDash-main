@@ -130,31 +130,6 @@ def process():
         download_name=f"{base_name}_bundle.zip"
     )
 
-def process2():
-    #store typed input data as a variable
-    input_data = request.form['inputData']
-
-    #store option value as a variable
-    option = request.form['optionSelect']
-
-    # Expect uploaded file
-    if "data" not in request.files:
-        return jsonify({"error": "Upload both data.csv"}), 400
-
-    data_file = request.files["data"]
-
-    # Use the original filenames
-    data_filename = secure_filename(data_file.filename)
-
-    # Strip extension from data_filename
-    base_name = os.path.splitext(data_filename)[0]
-
-    # Build full paths inside UPLOAD folder
-    data_path = os.path.join(app.config["UPLOAD_FOLDER"], data_filename)
-
-    # Save uploaded files with their original names
-    data_file.save(data_path)
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
