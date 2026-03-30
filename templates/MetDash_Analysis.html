@@ -11,192 +11,159 @@
     <!-- Font Awesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <style>
-        html {
-            interpolate-size: allow-keywords;
-        }
+<style>
+    html {
+        interpolate-size: allow-keywords;
+    }
 
-        body {
-            background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
-            background-attachment: fixed;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+    body {
+        background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: system-ui;
+        font-size: 1rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
 
-        nav {
-            width: fit-content;
-            margin: 0rem auto;
-            margin-right: calc(100% - 70%);
+    /* TOP BAR */
+    .top-bar {
+        background-color: rgb(249, 246, 246);
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-sizing: border-box;
+    }
 
-            padding: 10px;
-            /*   background: black; */
-            border-radius: 8px;
+    .top-bar h1 {
+        font-size: 24px;
+        color: rgb(5, 4, 4);
+        margin: 0;
+    }
 
-            @supports (corner-shape: squircle) {
-                border-radius: 24px;
-                border-shape: squircle;
-            }
+    /* NAV */
+    nav > ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        background: hsl(0 0% 0% / 0.8);
+        border-radius: 8px;
+        padding: 6px;
+    }
 
-            ul:has(:not(:hover)) {
-                anchor-name: --test;
-            }
+    nav a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        text-decoration: none;
+        color: white;
+        font-size: 0.9rem;
+    }
 
-            &::before {
-                z-index: -2;
-                background-attachment: fixed;
-                background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
-            }
+    nav a:hover {
+        background-color: rgba(255,255,255,0.15);
+        border-radius: 6px;
+    }
 
-            &::after {
-                backdrop-filter: blur(2px);
-                background-color: hsl(200 100% 100% / 0.1);
-                z-index: -1;
-            }
+    /* SEARCH */
+    input[type=text] {
+        width: 120px;
+        box-sizing: border-box;
+        border: 2px solid #0a0101;
+        border-radius: 15px;
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.658);
+        padding: 6px 10px;
+        transition: width 0.4s ease-in-out;
+    }
 
-            & > ul {
-                position: relative;
+    input[type=text]:focus {
+        width: 180px;
+        outline: none;
+    }
 
-                &::after {
-                content: "";
-                position: absolute;
-                z-index: -3;
-                inset: -8px;
-                border-radius: 8px;
+    /* MAIN CONTAINER */
+    .container {
+        margin-top: 120px;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 100%;
+        flex: 1; /* This pushes the footer down */
+        align-content: flex-start;
+    }
 
-                @supports (corner-shape: squircle) {
-                    border-radius: 24px;
-                    border-shape: squircle;
-                }
-                background: hsl(0 0% 0% / 0.8);
-                backdrop-filter: blur(2px);
-                }
-            }
 
-            &::before,
-            &::after {
-                content: "";
-                border-radius: 8px;
+    /* SUBMISSION BOXES */
+    .Submission_Container1,
+    .Submission_Container2 {
+        text-align: center;
+        padding: 20px;
+        background-color: rgba(1, 1, 1, 0.505);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+        box-sizing: border-box;
+        height: auto; /* Remove fixed height */
+    }
 
-                position-anchor: --test;
-                position: absolute;
-                top: calc(anchor(bottom) - 4px);
-                left: calc(anchor(left) + 1rem);
-                right: calc(anchor(right) + 1rem);
-                bottom: anchor(bottom);
+    /* FOOTER */
+    .footer {
+        background-color: rgb(248, 244, 244);
+        text-align: center;
+        color: rgb(4, 4, 4);
+        font-size: 12px;
+        width: 100%;
+        margin-top: auto;
+        padding: 10px 0;
+    }
 
-                transition: 500ms;
-                transition-timing-function: linear(
-                0,
-                0.008 1.1%,
-                0.031 2.2%,
-                0.129 4.8%,
-                0.257 7.2%,
-                0.671 14.2%,
-                0.789 16.5%,
-                0.881 18.6%,
-                0.957 20.7%,
-                1.019 22.9%,
-                1.063 25.1%,
-                1.094 27.4%,
-                1.114 30.7%,
-                1.112 34.5%,
-                1.018 49.9%,
-                0.99 59.1%,
-                1
-                );
-            }
+    .footer img {
+        margin: 10px 0;
+        max-width: 150px;
+        height: auto;
+    }
 
-            &:has(a:hover)::before,
-            &:has(a:hover)::after {
-                @supports (corner-shape: squircle) {
-                corner-shape: squircle;
-                border-radius: 50%;
-                }
-                top: anchor(top);
-                left: anchor(left);
-                right: anchor(right);
-            }
-
-            &:has(li:first-of-type a:hover)::before,
-            &:has(li:first-of-type a:hover)::after {
-                @supports (corner-shape: squircle) {
-                border-radius: 32px 50% 50% 32px;
-                }
-            }
-
-            &:has(li:last-of-type a:hover)::before,
-            &:has(li:last-of-type a:hover)::after {
-                @supports (corner-shape: squircle) {
-                border-radius: 50% 32px 32px 50%;
-                }
-            }
-
-            > ul {
-                padding: 0;
-                margin: 0;
-                list-style: none;
-                display: flex;
-            }
-
-            a {
-                display: block;
-                padding: 1rem;
-                text-decoration: none;
-                color: white;
-
-                &:hover {
-                position: relative;
-                display: block;
-                anchor-name: --test;
-                }
-            }
-        }
-
-        html {
-            color-scheme: dark;
-        }
-
-        body {
-            font-family: system-ui;
-            font-size: 1rem;
-        }
-
+    /* MOBILE BREAKPOINT */
+    @media (max-width: 600px) {
         .top-bar {
-            background-color: rgb(249, 246, 246);
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .top-bar img {
-            height: auto;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
         }
 
         .top-bar h1 {
-            font-size: 30px;
-            color: rgb(5, 4, 4);
-            margin: 0 20px;
-            flex-grow: 1;
+            font-size: 20px;
+        }
+
+        nav > ul {
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
         }
 
         input[type=text] {
-            width: 150px;
-            box-sizing:border-box;
-            border: 2px solid #0a0101;
-            border-radius: 15px;
-            font-size: 16px;
-            background-color: rgba(255, 255, 255, 0.658);
-            background-image: url('searchicon.png');
-            background-position: 10px 10px; 
-            background-repeat: no-repeat;
-            padding: 6px 10px 6px 20px;
-            -webkit-transition: width 0.4s ease-in-out;
-            transition: width 0.4s ease-in-out;
+            width: 100%;
         }
 
         input[type=text]:focus {
@@ -204,84 +171,21 @@
         }
 
         .container {
-            margin-top: 150px; /* Adjusted for fixed top bar*/
-            padding: 20px;
-            background-color: rgba(172, 159, 159, 0);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
-            width: fit-content;
-            height: fit-content;
-            display:flex;
-            flex-wrap: wrap;
-            gap: 50px;
-            justify-content: center;
+            margin-top: 160px;
+            padding: 10px;
+            gap: 20px;
         }
 
-        /*.Description {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(255, 249, 249, 0);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.034);
-            width: 400px;
-            text-align: center;
-            margin-left: 10px;
-            margin-top: 10px;
-            height: fit-content;
-        }
-        
-        .Description summary {
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }*/
-
-        .Submission_Container1 {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(1, 1, 1, 0.505);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.034);
-            width: 500px;
-            text-align: center;
-            margin-left: 10px;
-            margin-top: 10px;
-            height: 400px;
-        }
-
+        .Submission_Container1,
         .Submission_Container2 {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(1, 1, 1, 0.505);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.034);
-            width: 500px;
-            text-align: center;
-            margin-left: 10px;
-            margin-top: 10px;
-            height: 400px;
+            padding: 15px;
         }
 
-        .footer {
-            margin-top: calc(100% - 85%);
-            background-color: rgb(248, 244, 244);
-            text-align: center;
-            color: rgb(4, 4, 4);
-            font-size: 12px;
-            position: relative;
-            bottom: auto;
-            display: inline-block;
+        button.btn {
             width: 100%;
         }
-
-        .footer img {
-            position: inherit;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-    </style>
+    }
+</style>
 </head>
 <body>
     <div class="top-bar">
