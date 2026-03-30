@@ -40,12 +40,12 @@ def home():
 # About page
 @app.route("/about")
 def about():
-    return render_template("MetDash_About.html")
+    return render_template("MetDash - Analysis1.html")
 
 # Blog page
 @app.route("/blog")
 def blog():
-    return render_template("MetDash - Analysis1.html")
+    return render_template("MetDash_Blog.html")
 
 # Contact page
 @app.route("/contact")
