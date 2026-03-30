@@ -62,8 +62,15 @@
         }
     
         /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 2;
+        }
+        
         nav > ul {
-            padding: 0;
+            padding: 6px;
             margin: 0;
             list-style: none;
             display: flex;
@@ -71,7 +78,6 @@
             gap: 4px;
             background: hsl(0 0% 0% / 0.8);
             border-radius: 8px;
-            padding: 6px;
         }
     
         nav a {
@@ -108,9 +114,9 @@
             width: 90%;
             max-width: 1000px;
             position: relative;
-            margin: 30px auto 0;
+            margin: 100px auto 0;  /* was 30px — needs to clear the fixed top bar */
         }
-    
+            
         .prev, .next {
             cursor: pointer;
             position: absolute;
@@ -272,11 +278,11 @@
     
         /* MOBILE BREAKPOINT */
         @media (max-width: 600px) {
-            .top-bar {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px;
+            .slideshow-container {
+                width: 100%;
+                margin-top: 160px;  /* taller because top bar stacks vertically on mobile */
             }
+        }
     
             .top-bar h1 {
                 font-size: 22px;
