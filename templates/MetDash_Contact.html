@@ -16,6 +16,12 @@
             interpolate-size: allow-keywords;
         }
     
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    
         body {
             background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
             background-attachment: fixed;
@@ -26,8 +32,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            margin: 0;
-            padding: 0;
         }
     
         /* TOP BAR */
@@ -43,7 +47,6 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-sizing: border-box;
         }
     
         .top-bar h1 {
@@ -53,8 +56,15 @@
         }
     
         /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 2;
+        }
+    
         nav > ul {
-            padding: 0;
+            padding: 6px;
             margin: 0;
             list-style: none;
             display: flex;
@@ -62,7 +72,6 @@
             gap: 4px;
             background: hsl(0 0% 0% / 0.8);
             border-radius: 8px;
-            padding: 6px;
         }
     
         nav a {
@@ -74,14 +83,13 @@
         }
     
         nav a:hover {
-            background-color: rgba(255,255,255,0.15);
+            background-color: rgba(255, 255, 255, 0.15);
             border-radius: 6px;
         }
     
         /* SEARCH */
         input[type=text] {
             width: 120px;
-            box-sizing: border-box;
             border: 2px solid #0a0101;
             border-radius: 15px;
             font-size: 14px;
@@ -97,69 +105,36 @@
     
         /* MAIN CONTAINER */
         .container {
-            display:flex;
+            display: flex;
             flex-wrap: wrap;
-            gap: auto;
+            gap: 20px;              /* was 'auto' which is invalid */
             justify-content: center;
-            padding: 10px 0;
-            margin-top: 200px;
+            padding: 20px;
+            margin-top: 120px;
             margin-bottom: 20px;
+            flex: 1;                /* pushes footer down */
+            align-content: flex-start;
         }
-
-        .card-custom1 {
-            padding: 20px;
-            text-align: center;
-            width: 200%;
-            max-width: 300px;
-            height: fit-content;
-            border-radius: 0px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            background-color:#e904047e ;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-
-        /*
-        .card-custom2 {
-            padding: 20px;
-            text-align: center;
-            width: 200%;
-            max-width: 300px;
-            height: 300px;
-            border-radius: 0px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            background-color:#107a0c99 ;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-        
-        .card-custom3 {
-            padding: 20px;
-            text-align: center;
-            width: 200%;
-            max-width: 300px;
-            height: 300px;
-            border-radius: 0px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            background-color:#1c0c7a98 ;
-            margin-left: 10px;
-            margin-top: 10px;
-        }        
-
+    
+        /* CARDS */
+        .card-custom1,
+        .card-custom2,
+        .card-custom3,
         .card-custom4 {
             padding: 20px;
             text-align: center;
-            width: 200%;
+            width: 100%;            /* was 200% which causes overflow */
             max-width: 300px;
-            height: 300px;
-            border-radius: 0px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            background-color:#f9f9fa9e ;
-            margin-left: 10px;
-            margin-top: 10px;
+            height: fit-content;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
-        */     
-
+    
+        .card-custom1 { background-color: #e904047e; }
+        .card-custom2 { background-color: #107a0c99; }
+        .card-custom3 { background-color: #1c0c7a98; }
+        .card-custom4 { background-color: #f9f9fa9e; }
+    
         /* FOOTER */
         .footer {
             background-color: rgb(248, 244, 244);
@@ -209,7 +184,7 @@
             .container {
                 margin-top: 160px;
                 padding: 10px;
-                gap: 20px;
+                gap: 15px;
             }
     
             .card-custom1,
