@@ -23,6 +23,11 @@
         background-repeat: no-repeat;
         font-family: system-ui;
         font-size: 1rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
     }
 
     /* TOP BAR */
@@ -100,7 +105,10 @@
         justify-content: center;
         box-sizing: border-box;
         width: 100%;
+        flex: 1; /* This pushes the footer down */
+        align-content: flex-start;
     }
+
 
     /* SUBMISSION BOXES */
     .Submission_Container1,
@@ -123,7 +131,7 @@
         color: rgb(4, 4, 4);
         font-size: 12px;
         width: 100%;
-        margin-top: 40px;
+        margin-top: auto;
         padding: 10px 0;
     }
 
