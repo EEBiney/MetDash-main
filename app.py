@@ -45,7 +45,7 @@ def about():
 # Blog page
 @app.route("/blog")
 def blog():
-    return render_template("MetDash_Analysis1.html")
+    return render_template("MetDash - Analysis1.html")
 
 # Contact page
 @app.route("/contact")
