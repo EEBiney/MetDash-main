@@ -115,7 +115,7 @@
             width: 90%;
             max-width: 1000px;
             position: relative;
-            margin: 100px auto 0;  /* was 30px — needs to clear the fixed top bar */
+            margin: calc(80px + 20px) auto 0; /* header height + desired spacing */
         }
             
         .prev, .next {
@@ -283,10 +283,9 @@
                 width: 100%;
                 margin-top: 160px;  /* taller because top bar stacks vertically on mobile */
             }
-        }
     
             .top-bar h1 {
-                font-size: 22px;
+                font-size: 20px;
             }
     
             nav > ul {
@@ -298,17 +297,9 @@
                 font-size: 0.8rem;
             }
     
-            input[type=text] {
-                width: 100%;
-            }
-    
+            input[type=text],
             input[type=text]:focus {
                 width: 100%;
-            }
-    
-            .slideshow-container {
-                width: 100%;
-                margin-top: 20px;
             }
     
             .begin-section,
