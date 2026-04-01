@@ -16,12 +16,6 @@
             interpolate-size: allow-keywords;
         }
     
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-    
         body {
             background-image: url("https://www.creative-proteomics.com/blog/wp-content/uploads/2024/01/plant-metabolomics-techniques-applications-and-phytochemical-insights.jpg");
             background-attachment: fixed;
@@ -32,11 +26,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            margin: 0;
+            padding: 0;
         }
     
         /* TOP BAR */
         .top-bar {
-            background-color: rgb(248, 247, 247);
+            background-color: rgb(249, 246, 246);
             padding: 10px 20px;
             display: flex;
             align-items: center;
@@ -47,19 +43,20 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-sizing: border-box;
         }
     
         .top-bar h1 {
-            font-size: 30px;
-            color: rgb(7, 53, 37);
+            font-size: 24px;
+            color: rgb(5, 4, 4);
             margin: 0;
             flex-grow: 1;
         }
     
-        .top-bar img {
+       /* .top-bar img {
             height: auto;
             max-width: 150px;
-        }
+        } */
     
         /* NAV */
         nav {
