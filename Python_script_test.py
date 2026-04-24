@@ -29,7 +29,7 @@ def process_heights(temp, samp):
     return heights
 
 def subtract_blank(heights, samp):
-    BK_indices = samp[samp["Sample"].str.contains("BK")].index
+    BK_indices = samp[samp["Sample"].str.contains("Blank")].index
     BK = heights.iloc[BK_indices].mean(skipna=True).values
     BK = np.nan_to_num(BK)
 
