@@ -74,7 +74,7 @@ def clean_data(heights, samp):
     ]
     heights = heights.drop(columns=cols_to_drop)
 
-    # Drop rows where Sample contains "Blank"
+    # Drop rows where Sample contains "BK"
     samp_clean = samp[~samp["Sample"].str.contains("Blank", case=False, na=False)]
     heights_clean = heights.loc[samp_clean["Rawname"]]
     
