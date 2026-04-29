@@ -44,7 +44,7 @@ def process_heights(temp, samp):
     #return heights, BK
 
 def subtract_blank(heights, samp):
-    BK_rows = samp[samp["Sample"].str.contains("BK|blank|Blank|BLANK")].index
+    BK_rows = samp[samp["Sample"].str.contains(""Blank", case=False, na=False)].index
     BK_matrix = heights.iloc[BK_rows, :]
     BK = BK_matrix.to_numpy().flatten()
     BK = np.nan_to_num(BK)
