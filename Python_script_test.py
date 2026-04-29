@@ -44,24 +44,37 @@ def process_heights(temp, samp):
     #return heights, BK
 
 def subtract_blank(heights, samp):
-    BK_rows = samp[samp["Sample"].str.contains(""Blank", case=False, na=False)].index
-    BK_matrix = heights.iloc[BK_rows, :]
-    BK = BK_matrix.to_numpy().flatten()
+    # FIX 1: straight quotes, correct index handling
+    BK_rawnames = samp[samp["Sample"].str.contains("BK|blank|Blank|BLANK", na=False)]["Rawname"]
+    BK_matrix = heights.loc[heights.index.isin(BK_rawnames)]
+
+    if BK_matrix.empty:
+        raise ValueError("No blank samples found. Check that Sample column contains 'BK', 'Blank', or 'BLANK'")
+
+    # FIX 2: use mean across blank rows, not flatten (flatten breaks with multiple blanks)
+    BK = BK_matrix.mean().values
     BK = np.nan_to_num(BK)
 
-    medi = heights.median(skipna=True).values
+    medi = heights.median().values
     medi_bk = medi - BK
-    valid_cols = (medi_bk / BK > 0.2)
+
+    # FIX 3: avoid division by zero
+    with np.errstate(divide='ignore', invalid='ignore'):
+        valid_cols = np.where(BK > 0, medi_bk / BK > 0.2, True)
+
     heights = heights.loc[:, valid_cols]
     BK = BK[valid_cols]
 
-    # Subtract BK from each row
-    heights = heights.apply(lambda row: row.values - BK, axis=1, result_type='expand')
-    heights.index = heights.index
+    heights = heights.subtract(BK, axis=1)
     return heights, BK
 
 def normalize_ribitol(heights):
-    ribitol_cols = heights.columns[heights.columns.str.contains("ribitol")]
+    # FIX 4: case-insensitive ribitol detection
+    ribitol_cols = heights.columns[heights.columns.str.contains("ribitol", case=False)]
+
+    if ribitol_cols.empty:
+        raise ValueError("No ribitol column found. Check column names in your data file.")
+
     rib = heights[ribitol_cols]
     if not (rib == 0).all().all():
         heights = heights.div(rib.values, axis=0)
