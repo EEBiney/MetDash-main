@@ -28,19 +28,36 @@ def process_heights(temp, samp):
     heights.index = rawnames
     return heights
 
+#def subtract_blank(heights, samp):
+    #BK_indices = samp[samp["Sample"].str.contains("Blank")].index
+    #BK = heights.iloc[BK_indices].mean(skipna=True).values
+    #BK = np.nan_to_num(BK)
+
+    #medi = heights.median(skipna=True)
+    #medi_bk = medi - BK
+    #valid_cols = (medi_bk / BK > 0.2)
+    #heights = heights.loc[:, valid_cols]
+    #BK = BK[valid_cols.values]
+
+    #Subtract BK from each row
+    #heights = heights.apply(lambda row: row - BK, axis=1)
+    #return heights, BK
+
 def subtract_blank(heights, samp):
-    BK_indices = samp[samp["Sample"].str.contains("Blank")].index
-    BK = heights.iloc[BK_indices].mean(skipna=True).values
+    BK_rows = samp[samp["Sample"].str.contains("BK|blank|Blank|BLANK")].index
+    BK_matrix = heights.iloc[BK_rows, :]
+    BK = BK_matrix.to_numpy().flatten()
     BK = np.nan_to_num(BK)
 
-    medi = heights.median(skipna=True)
+    medi = heights.median(skipna=True).values
     medi_bk = medi - BK
     valid_cols = (medi_bk / BK > 0.2)
     heights = heights.loc[:, valid_cols]
-    BK = BK[valid_cols.values]
+    BK = BK[valid_cols]
 
-    Subtract BK from each row
-    heights = heights.apply(lambda row: row - BK, axis=1)
+    # Subtract BK from each row
+    heights = heights.apply(lambda row: row.values - BK, axis=1, result_type='expand')
+    heights.index = heights.index
     return heights, BK
 
 def normalize_ribitol(heights):
